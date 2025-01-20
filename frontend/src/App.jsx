@@ -10,7 +10,10 @@ function App() {
     return (
         <>
             <Nav/>
+            <main>
 
+                <PostList/>
+            </main>
         </>
     )
 }
