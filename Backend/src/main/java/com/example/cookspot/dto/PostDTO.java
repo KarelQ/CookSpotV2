@@ -21,4 +21,5 @@ public class PostDTO {
     private Integer like;
     private Integer dislike;
     private String username;
+    private String idUser;
 }

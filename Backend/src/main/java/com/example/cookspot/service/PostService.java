@@ -4,6 +4,7 @@ import com.example.cookspot.entity.Post;
 import com.example.cookspot.dto.PostDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class PostService {
         postDTO.setLike(post.getLike());
         postDTO.setDislike(post.getDislike());
         postDTO.setUsername(post.getUser().getUsername());
+        postDTO.setIdUser(post.getUser().getIdUser());
 
         return postDTO;
 
@@ -44,13 +46,13 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    public PostDTO getPostDTOById(String id) {
+        return convertPostToPostDTO(postRepository.findById(id).orElse(null));
+    }
+
+
     public List<Post> getAllPosts() {
         List<Post> test = postRepository.findAll();
-
-        for(Post p : test) {
-            System.out.println(p.getUser().getUsername());
-        }
-
         return postRepository.findAll();
     }
 

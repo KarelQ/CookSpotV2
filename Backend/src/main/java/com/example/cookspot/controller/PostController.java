@@ -21,6 +21,12 @@ public class PostController {
         return postService.getAllPostsDTO();
     }
 
+    @GetMapping("/api/posts/{id}")
+    public PostDTO getPostDTOById(@PathVariable String id) {
+        return postService.getPostDTOById(id);
+    }
+
+
 
 //    @PostMapping
 //    public Post createPost(@RequestBody Post project) {
