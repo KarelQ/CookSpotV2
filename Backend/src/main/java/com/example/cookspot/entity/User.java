@@ -1,20 +1,17 @@
 package com.example.cookspot.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.*;
 
-import java.awt.print.Book;
 import java.util.List;
-import java.util.Set;
 
+
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
 @Table(name = "users")
 public class User {
     @Id
@@ -33,7 +30,9 @@ public class User {
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Post> posts;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Post> posts;
+
+
 
 }

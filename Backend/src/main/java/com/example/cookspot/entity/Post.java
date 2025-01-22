@@ -5,15 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
-
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "posts")
 public class Post {
     @Id
@@ -60,12 +60,12 @@ public class Post {
 
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user_owner", referencedColumnName = "id_user")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_user_owner")
     private User user;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String username;
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    private String username;
 
 //    @Transient
 //    private String username; // Pole pochodzące z tabeli `users`
