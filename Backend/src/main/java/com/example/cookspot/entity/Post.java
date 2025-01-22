@@ -1,5 +1,7 @@
 package com.example.cookspot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -11,14 +13,15 @@ import org.hibernate.annotations.ColumnDefault;
 @AllArgsConstructor
 @Entity
 
+
 @Table(name = "posts")
 public class Post {
     @Id
     @Column(name = "id_post", nullable = false, length = 30)
     private String idPost;
 
-    @Column(name = "id_user_owner", nullable = false)
-    private String idUserOwner;
+//    @Column(name = "id_user_owner", nullable = false)
+//    private String idUserOwner;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -55,55 +58,16 @@ public class Post {
     @Column(name = "dislike", nullable = false)
     private Integer dislike;
 
-    public String getIdPost() {
-        return idPost;
-    }
 
-    public String getIdUserOwner() {
-        return idUserOwner;
-    }
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user_owner", referencedColumnName = "id_user")
+    private User user;
 
-    public String getTitle() {
-        return title;
-    }
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String username;
 
-    public String getDescription() {
-        return description;
-    }
+//    @Transient
+//    private String username; // Pole pochodzące z tabeli `users`
 
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public String getRecipe() {
-        return recipe;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getPrepTime() {
-        return prepTime;
-    }
-
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public Integer getNumberOfServings() {
-        return numberOfServings;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public Integer getLike() {
-        return like;
-    }
-
-    public Integer getDislike() {
-        return dislike;
-    }
 }

@@ -2,6 +2,7 @@ package com.example.cookspot.controller;
 
 import com.example.cookspot.entity.Post;
 import com.example.cookspot.service.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,19 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin("*")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
     private final PostService postService;
 
-    @Autowired
-    public PostController(PostService postService) {
 
-        this.postService = postService;
-    }
     @GetMapping()
-
     public ResponseEntity<List<Post>> getAllPosts() {
 
         List<Post> temp = postService.getAllPosts();
