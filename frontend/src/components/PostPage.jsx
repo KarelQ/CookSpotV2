@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
-import {postList} from "../services/PostService.jsx";
 import PostDetails from "./PostDetails.jsx";
 import {useParams} from "react-router-dom";
 import {postDetailsById} from "../services/PostService.jsx";
-import PostList from "./PostList.jsx";
+import Error from "./Error.jsx";
 
 
 
@@ -30,7 +29,7 @@ const PostPage = () => {
         }, [id]);
 
         if (error) {
-            return <div>{error}</div>;
+            return (<Error error={error} />);
         }
     const rate = 1;
     const book = true;
