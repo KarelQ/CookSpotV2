@@ -1,4 +1,5 @@
 package com.example.cookspot.service;
+import com.example.cookspot.entity.Category;
 import com.example.cookspot.repository.PostRepository;
 import com.example.cookspot.entity.Post;
 import com.example.cookspot.dto.PostDTO;
@@ -34,6 +35,13 @@ public class PostService {
         postDTO.setDislike(post.getDislike());
         postDTO.setUsername(post.getUser().getUsername());
         postDTO.setIdUser(post.getUser().getIdUser());
+        postDTO.setCategoryNames(
+                post.getPostCategoriesList()
+                        .stream()
+                        .map(Category::getCategoryName) // Use map to get the category names
+                        .collect(Collectors.toSet()) // Collect the results into a set
+        );
+
 
         return postDTO;
 

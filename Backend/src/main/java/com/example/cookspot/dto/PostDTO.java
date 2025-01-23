@@ -2,6 +2,9 @@ package com.example.cookspot.dto;
 
 import lombok.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Data
 @Getter
 @Setter
@@ -22,4 +25,5 @@ public class PostDTO {
     private Integer dislike;
     private String username;
     private String idUser;
+    private Set<String> categoryNames;
 }

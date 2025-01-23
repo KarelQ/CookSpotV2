@@ -7,6 +7,11 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 
 @Data
 @Entity
@@ -63,6 +68,16 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user_owner")
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "post_categories",
+            joinColumns = @JoinColumn(name = "id_post"),
+            inverseJoinColumns = @JoinColumn(name = "id_category"))
+    Set<Category> postCategoriesList;
+
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<PostCategory> postCategories = new ArrayList<>();
 
 //    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
 //    private String username;
