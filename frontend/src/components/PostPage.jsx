@@ -5,13 +5,34 @@ import {postDetailsById} from "../services/PostService.jsx";
 import Error from "./Error.jsx";
 
 
-
-
 const PostPage = () => {
     const { id } = useParams();
 
-        const [post, setPost] = useState([]);
-        const [error, setError] = useState(null);
+    const [post, setPost] = useState([]);
+    const [error, setError] = useState(null);
+
+// useEffect(() => {
+//     if (id) {
+//         console.log("id", id);
+//
+//         // Define multiple API calls
+//         const fetchPostDetails = postDetailsById(id);
+//
+//         Promise.all([fetchPostDetails])
+//             .then(([postResponse]) => {
+//                 // Process both responses
+//                 setPost({
+//                     ...postResponse.data,
+//                 });
+//             })
+//             .catch((error) => {
+//                 console.error(error);
+//                 setError("Failed to fetch post or related data.");
+//             });
+//     }
+// }, [id]);
+
+
 
 
     useEffect(() => {
@@ -28,37 +49,19 @@ const PostPage = () => {
             }
         }, [id]);
 
+
+
         if (error) {
             return (<Error error={error} />);
         }
     const rate = 1;
     const book = true;
-    const category = ["Italian", "FastFood", "Dinner"];
     const isAdmin = true;
 
     return (
-        <PostDetails post={post} rate={rate} book={book} category={category} isAdmin={isAdmin}/>
+        <PostDetails post={post} rate={rate} book={book} isAdmin={isAdmin}/>
     )
 
-
-
-
-        // const [posts] = useState([
-        //     {
-        //         idPost: "1",
-        //         userOwner: "JohnDoe",
-        //         title: "Delicious Pizza",
-        //         description: "A classic pizza recipe with a crispy crust and fresh toppings.",
-        //         ingredients: "Flour, Water, Yeast, Tomato Sauce, Cheese, Pepperoni",
-        //         recipe: "1. Prepare dough. 2. Add toppings. 3. Bake in oven at 220°C for 15 minutes.",
-        //         image: "pizza.jpg",
-        //         prepTime: "30 mins",
-        //         difficulty: "Easy",
-        //         numberOfServings: 4,
-        //         createdAt: "2025-01-16",
-        //     }
-        //     ]);
-        //
 
 
 }

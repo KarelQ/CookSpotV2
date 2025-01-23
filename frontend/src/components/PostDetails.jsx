@@ -1,7 +1,6 @@
 import "../css/style.css"; // Import pliku globalnego
 import style from '/src/css/post-detales.module.css'
 
-const PostDetails = ({ post, rate, book, category, isAdmin }) => {
     return (
         <main>
         <section className={`${style.posts} rate book category`}>
@@ -13,7 +12,7 @@ const PostDetails = ({ post, rate, book, category, isAdmin }) => {
                         <div>
                             <i className="material-symbols-outlined">account_circle</i>
                         </div>
-                        <span>{post.userOwner}</span>
+                        <span>{post.username}</span>
                         <div className={style["place-holder"]}>xxx</div>
                         <div>
                             <i className="material-symbols-outlined">signal_cellular_alt</i>
@@ -68,8 +67,13 @@ const PostDetails = ({ post, rate, book, category, isAdmin }) => {
                     <h1>{post.title}</h1>
 
                     {/*TODO bedze sprawiac problemy*/}
+                    {console.log(post.categoryNames)}
+
+
                     <h4>
-                        {category.map(cat => `#${cat} `)}
+                        {Array.from(post.categoryNames).map((categoryName, index) => (
+                            <span key={index}>#{categoryName} </span>
+                        ))}
                     </h4>
 
                     <p>{post.description}</p>
