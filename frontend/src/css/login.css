@@ -1,0 +1,111 @@
+#login{
+    background: url(/img/pizza.jpg);
+    background-attachment: fixed;
+    background-position: top center; 
+    background-size: 100vw;
+   
+    z-index: -1;
+    backdrop-filter: blur(5px) brightness(0.4);
+
+}
+
+.input-text {
+    border: solid 2px #FB8A22;
+    border-radius: 2em;
+    text-align: left;
+    color: black;
+    background-color: #ffffff;
+    letter-spacing: 0.7px;
+    padding: 0.5em;
+    width: 60%;
+    margin: 0.3em;
+
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+button.input-text {
+    border: solid 2px #ffffff;
+    text-align: center;
+    color: #ffffff;
+    background-color: #FB8A22 ;
+    width: calc(60% + 19px);
+    
+}
+
+
+form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.messages {
+    text-decoration: none;
+    text-align: center;
+    width: 80%;
+    font-size: 7 px;
+    color: #ff2100;
+    padding: 7px;
+}
+
+form > a {
+    text-decoration: none;
+    text-align: center;
+    width: 40%;
+    font-size: 7 px;
+    color: #ffffff;
+}
+form >a > span{
+    color: #FB8A22;
+}
+
+.base-container-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1;
+
+}   
+
+
+.login-container{
+    background-color: #151E26;
+    border: solid 2px #FB8A22;
+    border-radius: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 50vw;
+
+}
+
+img {
+    width: 50%;
+}
+
+
+
+@media screen and (max-width: 700px) {
+    
+    .login-container {
+        flex-direction: column;
+        height: 90vh;
+        width: 90vw;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    img {
+        width: 60%;
+    }
+}

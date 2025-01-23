@@ -1,0 +1,34 @@
+section.details {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    
+}
+
+div.details {
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-left: 30px;
+    margin: 10px;
+    background-color: #2A3C4C;
+    border-radius: 2em;
+
+}
+
+a.details{
+    width: 40%;
+    align-self: center;
+    margin-bottom: 0.5em;
+}
+
+div.details > p {
+    color: #fff;
+
+}
+
+div.details > h3 {
+    color: #FB8A22;
+}
