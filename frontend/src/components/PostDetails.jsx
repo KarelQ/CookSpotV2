@@ -1,5 +1,6 @@
 import "../css/style.css"; // Import pliku globalnego
 import style from '/src/css/post-detales.module.css'
+
 import Loading from './Loading';
 
 const PostDetails = ({ post, rate, book, isAdmin }) => {

@@ -7,6 +7,7 @@ import MainPagePosts from "/src/components/MainPagePosts.jsx";
 import Nav from "/src/components/Nav.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PostPage from "./components/PostPage.jsx";
+import AddPost from "./components/AddPost.jsx";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/mainpage" element={ <MainPagePosts /> } />
+                    <Route path="/addpost" element={ <AddPost /> } />
                     <Route path="/postpage/:id" element={< PostPage />} />
                 </Routes>
             </BrowserRouter>

@@ -1,4 +1,4 @@
-section {
+.section {
     font-size: 15px;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@ section {
     border-radius: 2em;
 }
 
-section > form {
+.section > form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,8 +19,24 @@ section > form {
     align-items: center;
 }
 
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 2em;
+}
 
-.input-text, textarea, .email, .password {
+.welcome-text {
+    margin: 1.2em;
+    font-size: 4vw;
+    color: #ffffff;
+}
+
+.no-valid {
+    border-color: red !important;
+}
+
+.input-text, .textarea, .email, .password {
     border: solid 2px #FB8A22;
     border-radius: 2em;
     text-align: left;
@@ -55,6 +71,7 @@ button.input-text {
     
 }
 
+
 .lists{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -64,7 +81,9 @@ button.input-text {
     justify-items: center;
 }
 
-
+.dropdown{
+    width: 100%;
+}
 
 .custom-select {
     position: relative;
@@ -77,7 +96,7 @@ button.input-text {
 }
 
 .checkbox-dropdown {
-    display: none;
+    display: hidden;
     position: absolute;
     width: 100%;
     max-height: 200px; 
