@@ -1,5 +1,6 @@
 package com.example.cookspot.controller;
 
+import com.example.cookspot.dto.PostDTO;
 import com.example.cookspot.entity.Category;
 import com.example.cookspot.service.CategoryService;
 import lombok.AllArgsConstructor;
@@ -18,5 +19,8 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-
+    @GetMapping("/api/category")
+    public List<String> getAllPostsDTO() {
+        return categoryService.getAllCategories();
+    }
 }
