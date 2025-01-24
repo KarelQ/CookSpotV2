@@ -18,12 +18,19 @@ import java.util.stream.Collectors;
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
-    public List<String> getAllCategories() {
+    public List<String> getAllCategoriesNames() {
         return categoryRepository.findAll()
                 .stream()
                 .map(Category::getCategoryName)
                 .collect(Collectors.toList());
     }
+
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+
+    }
+
+
 
 }
 

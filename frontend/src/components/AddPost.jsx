@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import style from "/src/css/add-post.module.css";
-import {categoryList} from "../services/CategoryService.jsx";
+import {category} from "../services/CategoryService.jsx";
 import Loading from "./Loading.jsx";
 import "/src/js/categories.js"
 
@@ -20,7 +20,7 @@ const AddPost = ({ messages }) => {
 
 
     useEffect(() => {
-        categoryList()
+        category()
             .then((response) => {
                 console.log("API Response:", response);
                 setCategories(response.data); // Ustawienie stanu z danymi
@@ -37,36 +37,34 @@ const AddPost = ({ messages }) => {
     // for dropdaw checkbox =========================
 
 
-        //const categories = ["Technology", "Health", "Finance", "Education", "Travel"]; // Categories array
-        const [selectedCategories, setSelectedCategories] = useState([]);
-        const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-        const dropdownRef = useRef(null);
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-        const handleCheckboxChange = (e) => {
-            const category = e.target.value;
-            setSelectedCategories((prevSelected) =>
-                prevSelected.includes(category)
-                    ? prevSelected.filter((item) => item !== category) // Remove if already selected
-                    : [...prevSelected, category] // Add if not selected
-            );
+    const handleCheckboxChange = (e) => {
+        const categoryId = parseInt(e.target.value, 10); // Parse the value as an integer
+        setSelectedCategories((prevSelected) =>
+            prevSelected.includes(categoryId)
+                ? prevSelected.filter((id) => id !== categoryId) // Remove if already selected
+                : [...prevSelected, categoryId] // Add if not selected
+        );
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen((prevState) => !prevState);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
         };
-
-        const toggleDropdown = () => {
-            setIsDropdownOpen((prevState) => !prevState);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-
-        // Close dropdown when clicking outside
-        useEffect(() => {
-            const handleClickOutside = (event) => {
-                if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                    setIsDropdownOpen(false);
-                }
-            };
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, []);
+    }, []);
 
 
     //===============================================
@@ -169,24 +167,23 @@ const AddPost = ({ messages }) => {
                         </div>
 
                         <div className={style["dropdown"]} ref={dropdownRef}>
-                            <button className={style["email"]}  type="button" onClick={toggleDropdown}>
+                            <button className={style["email"]} type="button" onClick={toggleDropdown}>
                                 Select Categories ({selectedCategories.length})
                             </button>
                             {isDropdownOpen && (
-                                <div className={style["checkbox-dropdown"]}>{
-                                    categories.map((category, index) => (
-                                        <label key={index} className="dropdown-item">
+                                <div className={style["checkbox-dropdown"]}>
+                                    {categories.map((category) => (
+                                        <label key={category.id} className="dropdown-item">
                                             <input
                                                 type="checkbox"
-                                                value={category}
-                                                className={style[""]}
-                                                checked={selectedCategories.includes(category)}
+                                                value={category.id}
+                                                checked={selectedCategories.includes(category.id)}
                                                 onChange={handleCheckboxChange}
                                             />
-                                            {category}
+                                            {category.categoryName}
                                         </label>
-                                    ))
-                                    }</div>
+                                    ))}
+                                </div>
                             )}
                         </div>
 
@@ -228,6 +225,6 @@ const AddPost = ({ messages }) => {
                 </section>
             </main>
     );
-    };
+};
 
-    export default AddPost;
+export default AddPost;
