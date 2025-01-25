@@ -22,7 +22,7 @@ import java.util.Set;
 @Table(name = "posts")
 public class Post {
     @Id
-    @Column(name = "id_post", nullable = false, length = 30)
+    @Column(name = "id_post", nullable = false, length = 50)
     private String idPost;
 
 //    @Column(name = "id_user_owner", nullable = false)
@@ -56,7 +56,7 @@ public class Post {
     private String createdAt;
 
     @ColumnDefault("0")
-    @Column(name = "like", nullable = false)
+    @Column(name = "likes", nullable = false)
     private Integer like;
 
     @ColumnDefault("0")

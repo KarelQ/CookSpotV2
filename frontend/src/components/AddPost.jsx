@@ -3,9 +3,13 @@ import style from "/src/css/add-post.module.css";
 import {category} from "../services/CategoryService.jsx";
 import Loading from "./Loading.jsx";
 import "/src/js/categories.js"
+import {createPost} from "../services/PostService.jsx";
+import {useNavigate} from "react-router-dom";
+import {v4 as uuidv4} from "uuid";
 
 
 const AddPost = ({ messages }) => {
+
 
     const [title, setTitle] = useState("");
     const [difficulty, setDifficulty] = useState("");
@@ -16,7 +20,13 @@ const AddPost = ({ messages }) => {
     const [recipe, setRecipe] = useState("");
     const [image, setImage] = useState(null);
 
-    const [categories, setCategories] = useState([]);
+    const [allCategoryNames, setCategories] = useState([]);
+
+    const navigate = useNavigate();
+
+    const [idUserOwner] = useState("1234");
+    const [like] = useState(0);
+    const [dislike] = useState(0);
 
 
     useEffect(() => {
@@ -31,13 +41,17 @@ const AddPost = ({ messages }) => {
     }, []); // Tylko raz po zamontowaniu komponentu
 
 
-
+    const [idPost, setUniqueId] = useState("");
+    useEffect(() => {
+        const newId = uuidv4();
+        setUniqueId(newId);
+    }, []);
 
 
     // for dropdaw checkbox =========================
 
 
-    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [categoryNames, setSelectedCategories] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -72,7 +86,24 @@ const AddPost = ({ messages }) => {
     function savePost (e){
         e.preventDefault();
 
+        // private String idPost;
+        // private String title;
+        // private String description;
+        // private String ingredients;
+        // private String recipe;
+        // private String image;
+        // private String prepTime;
+        // private String difficulty;
+        // private Integer numberOfServings;
+        // private String createdAt;
+        // private Integer like;
+        // private Integer dislike;
+        // private String username;
+        // private String idUser;
+        // private Set<String> categoryNames;
+
         const post = {
+            idPost,
             title,
             difficulty,
             prepTime,
@@ -81,12 +112,24 @@ const AddPost = ({ messages }) => {
             ingredients,
             recipe,
             image,
-            selectedCategories,
+            categoryNames,
+            like,
+            dislike,
+            idUserOwner,
         }
         console.log(post);
+
+
+        createPost(post).then((response) => {
+            console.log(response.data);
+            navigate(`/postpage/${post.postId}`);
+
+        });
+
+
     }
 
-    if (!categories[0] ) {
+    if (!allCategoryNames[0] ) {
         return <Loading/>; // Show a loading state
     }
 
@@ -168,16 +211,16 @@ const AddPost = ({ messages }) => {
 
                         <div className={style["dropdown"]} ref={dropdownRef}>
                             <button className={style["email"]} type="button" onClick={toggleDropdown}>
-                                Select Categories ({selectedCategories.length})
+                                Select Categories ({allCategoryNames.length})
                             </button>
                             {isDropdownOpen && (
                                 <div className={style["checkbox-dropdown"]}>
-                                    {categories.map((category) => (
+                                    {allCategoryNames.map((category) => (
                                         <label key={category.id} className="dropdown-item">
                                             <input
                                                 type="checkbox"
                                                 value={category.id}
-                                                checked={selectedCategories.includes(category.id)}
+                                                checked={categoryNames.includes(category.id)}
                                                 onChange={handleCheckboxChange}
                                             />
                                             {category.categoryName}
@@ -216,7 +259,8 @@ const AddPost = ({ messages }) => {
                             type="file"
                             name="image"
                             className={style["input-text"]}
-                            onChange={(e) => setImage(e.target.files[0])}
+                            // onChange={(e) => setImage(e.target.files[0].toString())}
+                            onChange={() => setImage("test")}
                         />
                         <button onClick={savePost} className={style["input-text"]}>
                             Submit

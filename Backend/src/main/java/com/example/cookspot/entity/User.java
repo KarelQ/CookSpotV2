@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "id_user", nullable = false, length = 30)
+    @Column(name = "id_user", nullable = false, length = 50)
     private String idUser;
 
     @Column(name = "id_role")

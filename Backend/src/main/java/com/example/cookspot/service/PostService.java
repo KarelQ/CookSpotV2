@@ -1,13 +1,18 @@
 package com.example.cookspot.service;
 import com.example.cookspot.entity.Category;
+import com.example.cookspot.entity.User;
+import com.example.cookspot.repository.CategoryRepository;
 import com.example.cookspot.repository.PostRepository;
 import com.example.cookspot.entity.Post;
 import com.example.cookspot.dto.PostDTO;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.example.cookspot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +22,10 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     private PostDTO convertPostToPostDTO(Post post) {
         PostDTO postDTO = new PostDTO();
@@ -58,6 +67,38 @@ public class PostService {
         return convertPostToPostDTO(postRepository.findById(id).orElse(null));
     }
 
+
+    public PostDTO savePost(PostDTO postDTO) {
+
+        User user = userRepository.findById("1234").orElse(null);
+
+        List<Category> category =  categoryRepository.findAllById(postDTO.getCategoryNames());
+
+        Post post = new Post();
+        post.setTitle(postDTO.getTitle());
+        post.setDescription(postDTO.getDescription());
+        post.setIngredients(postDTO.getIngredients());
+        post.setRecipe(postDTO.getRecipe());
+
+        post.setPrepTime(postDTO.getPrepTime());
+        post.setDifficulty(postDTO.getDifficulty());
+        post.setNumberOfServings(postDTO.getNumberOfServings());
+        post.setIdPost(postDTO.getIdPost());
+        post.setPostCategoriesList(category.stream().collect(Collectors.toSet()));
+
+
+        post.setLike(0);
+        post.setDislike(0);
+        post.setUser(user);
+
+        post.setImage("test");
+        post.setCreatedAt("01.01.12");
+
+        System.out.println(post.toString());
+
+        Post savedPost = postRepository.save(post);
+        return this.convertPostToPostDTO(post);
+    }
 
     public List<Post> getAllPosts() {
         List<Post> test = postRepository.findAll();
