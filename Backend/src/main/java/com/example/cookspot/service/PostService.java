@@ -117,4 +117,14 @@ public class PostService {
     public void deletePost(String id) {
         postRepository.deleteById(id);
     }
+
+    public List<Post> getPostsByUserId(String id) {
+        User user = userRepository.findById(id).orElse(null);
+        return postRepository.findByUser(user);
+    }
+
+    public List<Post> getPostDTOByCategoryId(String id) {
+        Set<Category> category = categoryRepository.findById(id).stream().collect(Collectors.toSet());
+        return postRepository.findByPostCategoriesList(category);
+    }
 }

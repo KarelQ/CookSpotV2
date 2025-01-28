@@ -28,6 +28,17 @@ public class PostController {
         return postService.getPostDTOById(id);
     }
 
+    @GetMapping("/api/posts/user/{id}")
+    public List<Post> getPostDTOByUserId(@PathVariable String id) {
+        return postService.getPostsByUserId(id);
+    }
+
+    @GetMapping("/api/posts/category/{id}")
+    public List<Post> getPostDTOByCategoryId(@PathVariable String id) {
+        return postService.getPostDTOByCategoryId(id);
+    }
+
+
     @PostMapping("/api/posts/addpost")
         public ResponseEntity<PostDTO> createPost(@RequestBody PostDTO postDTO) {
         PostDTO savedPost = postService.savePost(postDTO);

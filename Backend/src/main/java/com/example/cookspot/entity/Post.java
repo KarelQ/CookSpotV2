@@ -76,6 +76,8 @@ public class Post {
             inverseJoinColumns = @JoinColumn(name = "id_category"))
     Set<Category> postCategoriesList;
 
+
+
 //    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //    private List<PostCategory> postCategories = new ArrayList<>();
 
