@@ -12,3 +12,5 @@ export const postListByCategoryId = (category_id) => axios.get(REST_API_BASE_URL
 export const postDetailsById = (post_id) => axios.get(REST_API_BASE_URL + '/' + post_id);
 
 export  const createPost = (post) => axios.post(REST_API_BASE_URL+'/addpost', post);
+
+export  const saveImgFile = (img_) => axios.post(REST_API_BASE_URL+'/addpost', post);

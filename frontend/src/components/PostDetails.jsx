@@ -12,13 +12,24 @@ const PostDetails = ({ post, rate, book, isAdmin }) => {
         return <Loading/>; // Show a loading state
     }
 
+    const handleError = (e) => {
+        e.target.src = 'http://localhost:8080/api/img/default.png'; // Ścieżka do domyślnego obrazu
+    };
+
 
     return (
         <main>
         <section className={`${style.posts} rate book category`}>
             <div id={post.idPost}>
                 <div className={style["post-content"]}>
-                    <img src={`/public/uploads/${post.image}`} alt="post image" className={style["post-image"]}/>
+                    {/*<img src={`http://localhost:8080/api/img/${post.image}`} alt="post image" className={style["post-image"]}/>*/}
+                    <img
+
+                        src={`http://localhost:8080/api/img/${post.image}`}
+                        alt="post image"
+                        className={style['post-image']}
+                        onError={handleError}
+                    />
 
                     <div className={style["post-icons"]}>
                         <div>

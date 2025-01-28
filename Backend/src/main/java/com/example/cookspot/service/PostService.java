@@ -91,7 +91,7 @@ public class PostService {
         post.setDislike(0);
         post.setUser(user);
 
-        post.setImage("test");
+        post.setImage(postDTO.getImage());
         post.setCreatedAt("01.01.12");
 
         System.out.println(post.toString());

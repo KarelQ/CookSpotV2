@@ -18,7 +18,7 @@ const AddPost = ({ messages }) => {
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState("");
     const [recipe, setRecipe] = useState("");
-    const [image, setImage] = useState(null);
+    //const [image, setImageId] = useState("");
 
     const [allCategoryNames, setCategories] = useState([]);
 
@@ -27,6 +27,12 @@ const AddPost = ({ messages }) => {
     const [idUserOwner] = useState("1234");
     const [like] = useState(0);
     const [dislike] = useState(0);
+
+    const [imgFile, setImgFile] = useState(null);
+
+    const getFileExtension = (filename) => {
+        return filename.split('.').pop();
+    };
 
 
     useEffect(() => {
@@ -49,8 +55,6 @@ const AddPost = ({ messages }) => {
 
 
     // for dropdaw checkbox =========================
-
-
     const [categoryNames, setSelectedCategories] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -83,8 +87,9 @@ const AddPost = ({ messages }) => {
 
     //===============================================
 
-    function savePost (e){
+    async function savePost(e) {
         e.preventDefault();
+
 
         // private String idPost;
         // private String title;
@@ -101,6 +106,40 @@ const AddPost = ({ messages }) => {
         // private String username;
         // private String idUser;
         // private Set<String> categoryNames;
+
+
+
+
+
+        const formData = new FormData();
+        formData.append("file", imgFile);
+
+        const extension = getFileExtension(imgFile.name);
+        let image;
+        image = idPost + "." + extension;
+
+        formData.append("newFileName", image);
+        console.log(formData);
+
+
+
+
+        try {
+            const response = await fetch("http://localhost:8080/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                alert("File uploaded successfully!");
+            } else {
+                alert("File upload failed.");
+            }
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            alert("Error uploading file.");
+        }
+
 
         const post = {
             idPost,
@@ -119,10 +158,9 @@ const AddPost = ({ messages }) => {
         }
         console.log(post);
 
-
         createPost(post).then((response) => {
             console.log(response.data);
-            navigate(`/postpage/${post.postId}`);
+            navigate(`/postpage/${post.idPost}`);
 
         });
 
@@ -259,8 +297,8 @@ const AddPost = ({ messages }) => {
                             type="file"
                             name="image"
                             className={style["input-text"]}
-                            // onChange={(e) => setImage(e.target.files[0].toString())}
-                            onChange={() => setImage("test")}
+                            onChange={(e) => setImgFile(e.target.files[0])}
+                            //onChange={() => setImage("test")}
                         />
                         <button onClick={savePost} className={style["input-text"]}>
                             Submit
