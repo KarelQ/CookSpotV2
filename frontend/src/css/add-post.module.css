@@ -97,7 +97,7 @@ button.input-text {
 
 .checkbox-dropdown {
     display: hidden;
-    position: absolute;
+    /*position: absolute;*/
     width: 100%;
     max-height: 200px; 
     overflow-y: auto; 
