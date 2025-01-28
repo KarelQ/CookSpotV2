@@ -1,7 +1,10 @@
 import "../css/style.css"; // Import pliku globalnego
 import style from '/src/css/post-detales.module.css'
 
+
 import Loading from './Loading';
+import BookmarkContainer from "./BookmarkContainer.jsx";
+
 
 const PostDetails = ({ post, rate, book, isAdmin }) => {
 
@@ -55,30 +58,18 @@ const PostDetails = ({ post, rate, book, isAdmin }) => {
                         </div>
                     </div>
 
-                    <div className={style["bookmark-container"]}>
-                        <div className="bookmark-text">
-                            <span id="bookmark-text" className={book ? style.pressed : ''}>
-                                {book ? 'Bookmarked' : 'Bookmark'}
-                            </span>
-                        </div>
+                <BookmarkContainer postId={post.idPost}  initialBookmarked={book}/>
 
-                        <div className="bookmark">
-                            <i
-                                className={`bookmark material-symbols-outlined hover ${book ? style.pressed : ''}`}
-                                id="bookmark"
-                            >bookmark</i>
-                        </div>
-                    </div>
+
+
+
                 </div>
+
+
 
                 <div className={style["post-desc"]}>
                     <p className="date">Posted on: {post.createdAt}</p>
                     <h1>{post.title}</h1>
-
-                    {/*TODO bedze sprawiac problemy*/}
-                    {console.log(post.categoryNames)}
-
-
                     <h4>
                         {Array.from(post.categoryNames).map((categoryName, index) => (
                             <span key={index}>#{categoryName} </span>
