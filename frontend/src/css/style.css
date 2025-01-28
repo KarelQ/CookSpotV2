@@ -1,4 +1,15 @@
 
+.login-bimg{
+    background: url(/src/assets/pizza.png);
+    background-attachment: fixed;
+    background-position: top center;
+    background-size: 100vw;
+
+    z-index: -1;
+    backdrop-filter: blur(5px) brightness(0.4);
+
+}
+
 
 body {
 
@@ -9,7 +20,8 @@ body {
     margin: 0;
 }
 
-#root   {
+
+.bimg   {
     background: url(/src/assets/pizza.png) no-repeat 0 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;

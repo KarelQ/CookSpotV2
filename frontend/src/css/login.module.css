@@ -1,13 +1,14 @@
 #login{
     background: url(/img/pizza.jpg);
     background-attachment: fixed;
-    background-position: top center; 
+    background-position: top center;
     background-size: 100vw;
-   
+
     z-index: -1;
-    backdrop-filter: blur(5px) brightness(0.4);
+
 
 }
+
 
 .input-text {
     border: solid 2px #FB8A22;
@@ -71,6 +72,8 @@ form >a > span{
     justify-content: center;
     height: 100vh;
     z-index: 1;
+
+    backdrop-filter: blur(5px) brightness(0.4);
 
 }   
 
