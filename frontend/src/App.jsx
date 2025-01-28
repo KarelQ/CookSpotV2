@@ -8,22 +8,35 @@ import Nav from "/src/components/Nav.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PostPage from "./components/PostPage.jsx";
 import AddPost from "./components/AddPost.jsx";
+import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
+import MyProfile from "./components/MyProfile.jsx";
+import ExploreCategory from "./components/ExploreCategory.jsx";
+import ExploreCategoryPosts from "./components/ExploreCategoryPosts.jsx";
 
 
 function App() {
     return (
         <>
-            <Nav/>
+
             <BrowserRouter>
+
                 <Routes>
-                    <Route path="/mainpage" element={ <MainPagePosts /> } />
-                    <Route path="/addpost" element={ <AddPost /> } />
-                    <Route path="/postpage/:id" element={< PostPage />} />
+                    <Route path="/mainpage" element={<> <Nav/> <MainPagePosts/>  </>}/>
+                    <Route path="/addpost" element={<> <Nav/> <AddPost/> </>}/>
+                    <Route path="/postpage/:id" element={<> <Nav/>< PostPage/> </>}/>
+                    <Route path="/explore" element={<> <Nav/>< ExploreCategory/> </>}/>
+                    <Route path="/category/:id" element={<> <Nav/>< ExploreCategoryPosts/> </>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/myprofile" element={<> <Nav/>< MyProfile/> </>}/>
+
                 </Routes>
             </BrowserRouter>
 
         </>
-    )
+    );
 }
 
 export default App
