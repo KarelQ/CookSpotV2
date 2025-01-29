@@ -41,12 +41,27 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.bookmarks (
-    id_user character varying(30) NOT NULL,
-    id_post character varying(30) NOT NULL
+    id_user character varying(50) NOT NULL,
+    id_post character varying(50) NOT NULL,
+    id bigint NOT NULL
 );
 
 
 ALTER TABLE public.bookmarks OWNER TO docker;
+
+--
+-- Name: bookmarks_seq; Type: SEQUENCE; Schema: public; Owner: docker
+--
+
+CREATE SEQUENCE public.bookmarks_seq
+    START WITH 1
+    INCREMENT BY 50
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.bookmarks_seq OWNER TO docker;
 
 --
 -- Name: categories; Type: TABLE; Schema: public; Owner: docker
@@ -203,8 +218,7 @@ ALTER TABLE public.users OWNER TO docker;
 --
 
 CREATE TABLE public.users_details (
-    id_users_details character varying(30) NOT NULL,
-    id_user character varying(30) NOT NULL,
+    id_users_details character varying(50) NOT NULL,
     first_name character varying(30),
     last_name character varying(50),
     city character varying(50),
@@ -229,7 +243,7 @@ ALTER TABLE ONLY public.categories ALTER COLUMN id_category SET DEFAULT nextval(
 -- Data for Name: bookmarks; Type: TABLE DATA; Schema: public; Owner: docker
 --
 
-COPY public.bookmarks (id_user, id_post) FROM stdin;
+COPY public.bookmarks (id_user, id_post, id) FROM stdin;
 \.
 
 
@@ -289,16 +303,6 @@ COPY public.logs (id_user, log_date) FROM stdin;
 --
 
 COPY public.post_categories (id_post, id_category, id) FROM stdin;
-666e2187e5ef60.76685701	5	1
-666e2187e5ef60.76685701	8	2
-666e23d370c238.15772288	5	3
-666e23d370c238.15772288	7	4
-666e25492a3695.17767716	7	5
-666e25492a3695.17767716	9	6
-666e25bed83659.08403124	6	7
-1	5	8
-1	7	9
-a5d60354-4d5a-4cdf-acb6-b43ab682dcef	2	10
 \.
 
 
@@ -307,14 +311,6 @@ a5d60354-4d5a-4cdf-acb6-b43ab682dcef	2	10
 --
 
 COPY public.posts (id_post, id_user_owner, title, description, ingredients, recipe, image, prep_time, difficulty, number_of_servings, created_at, likes, dislike) FROM stdin;
-666e2187e5ef60.76685701	666e1bbb9e7401.42585095	Chicken Tikka Masala	A popular Indian dish featuring marinated chicken cooked in a creamy, spiced tomato sauce. Perfectly paired with rice or naan.	    500g boneless, skinless chicken thighs, cut into bite-sized pieces\r\n    1 cup plain yogurt\r\n    2 tbsp lemon juice\r\n    1 tbsp grated ginger\r\n    3 cloves garlic, minced\r\n    1 tsp ground cumin\r\n    1 tsp ground coriander\r\n    1 tsp ground turmeric\r\n    1 tsp garam masala\r\n    1 tsp paprika\r\n    1 tsp salt\r\n\r\nFor the Sauce:\r\n\r\n    2 tbsp vegetable oil\r\n    1 large onion, finely chopped\r\n    3 cloves garlic, minced\r\n    1 tbsp grated ginger\r\n    1 tsp ground cumin\r\n    1 tsp ground coriander\r\n    1 tsp ground turmeric\r\n    1 tsp garam masala\r\n    1 tsp paprika\r\n    1 tsp cayenne pepper (optional, for extra heat)\r\n    400g can crushed tomatoes\r\n    1 cup heavy cream\r\n    Fresh cilantro, chopped (for garnish)	    Marinate the Chicken:\r\n        In a large bowl, combine the yogurt, lemon juice, ginger, garlic, cumin, coriander, turmeric, garam masala, paprika, and salt.\r\n        Add the chicken pieces, stirring to coat them well.\r\n        Cover and refrigerate for at least 1 hour, or overnight for best results.\r\n\r\n    Cook the Chicken:\r\n        Preheat your oven to 200°C (400°F).\r\n        Arrange the marinated chicken pieces on a baking sheet.\r\n        Bake for 15-20 minutes, or until cooked through. Remove from oven and set aside.\r\n\r\n    Prepare the Sauce:\r\n        Heat the vegetable oil in a large skillet over medium heat.\r\n        Add the chopped onion and cook until soft and golden, about 5 minutes.\r\n        Stir in the garlic and ginger, cooking for another 1-2 minutes.\r\n        Add the ground cumin, coriander, turmeric, garam masala, paprika, and cayenne pepper (if using). Cook for 1 minute until fragrant.\r\n\r\n    Make the Masala:\r\n        Pour in the crushed tomatoes, stirring to combine.\r\n        Simmer for 10 minutes, allowing the flavors to meld.\r\n        Stir in the heavy cream, bringing the sauce to a gentle simmer.\r\n\r\n    Combine and Serve:\r\n        Add the cooked chicken to the sauce, stirring to coat the pieces thoroughly.\r\n        Simmer for another 5-10 minutes, ensuring the chicken is heated through and the sauce has thickened.\r\n        Garnish with fresh cilantro.\r\n        Serve hot with rice or naan.\r\n\r\nEnjoy your flavorful and creamy Chicken Tikka Masala!	666e2187e1b1f5.73468160.jpg	45min	medium	6	16-06-2024	100	2
-666e23d370c238.15772288	666e1bbb9e7401.42585095	Classic Beef Stroganoff	A rich and creamy Russian dish featuring tender beef strips cooked in a savory mushroom and sour cream sauce, served over egg noodles.	500g beef sirloin or tenderloin, thinly sliced\r\n2 tbsp olive oil\r\n1 large onion, finely chopped\r\n2 cloves garlic, minced\r\n250g mushrooms, sliced\r\n1 cup beef broth\r\n1 tbsp Dijon mustard\r\n1 tbsp Worcestershire sauce\r\n1 cup sour cream\r\n1 tbsp flour (optional, for thickening)\r\nSalt and pepper to taste\r\nFresh parsley, chopped (for garnish)\r\n300g egg noodles	    Cook the Beef:\r\n        Heat 1 tbsp of olive oil in a large skillet over medium-high heat.\r\n        Season the beef slices with salt and pepper.\r\n        Sear the beef in batches, cooking for 1-2 minutes on each side until browned. Remove from skillet and set aside.\r\n\r\n    Prepare the Vegetables:\r\n        In the same skillet, add the remaining 1 tbsp of olive oil.\r\n        Sauté the chopped onion until soft and translucent, about 5 minutes.\r\n        Add the minced garlic and cook for another 1-2 minutes.\r\n\r\n    Cook the Mushrooms:\r\n        Add the sliced mushrooms to the skillet.\r\n        Cook until they release their juices and start to brown, about 5-7 minutes.\r\n\r\n    Make the Sauce:\r\n        Pour in the beef broth, scraping up any browned bits from the bottom of the skillet.\r\n        Stir in the Dijon mustard and Worcestershire sauce.\r\n        Simmer for 5 minutes, allowing the flavors to meld.\r\n\r\n    Combine and Thicken:\r\n        If the sauce needs thickening, mix the flour with a little water to create a slurry and stir it into the sauce.\r\n        Add the sour cream, stirring until the sauce is creamy and smooth.\r\n        Return the cooked beef to the skillet, mixing it into the sauce. Simmer for another 5 minutes until the beef is heated through.\r\n\r\n    Cook the Noodles:\r\n        While the sauce simmers, cook the egg noodles according to package instructions.\r\n        Drain and set aside.\r\n\r\n    Serve:\r\n        Plate the cooked egg noodles.\r\n        Spoon the beef stroganoff over the noodles.\r\n        Garnish with chopped fresh parsley.\r\n\r\nEnjoy your hearty and comforting Classic Beef Stroganoff!	666e23d36b73f0.81294531.jpg	1,5h	hard	4	16-06-2024	50	1
-666e25492a3695.17767716	666b8d092770c2.98573332	Lemon Garlic Shrimp Scampi	A light and zesty dish featuring shrimp sautéed in a lemon garlic butter sauce, served over linguine. Perfect for a quick and elegant meal.	400g linguine\r\n500g large shrimp, peeled and deveined\r\n4 tbsp butter\r\n2 tbsp olive oil\r\n4 cloves garlic, minced\r\n1/4 tsp red pepper flakes (optional)\r\n1/4 cup white wine (or chicken broth)\r\nJuice and zest of 1 lemon\r\n1/4 cup fresh parsley, chopped\r\nSalt and pepper to taste\r\nLemon wedges (for serving)	    Cook the Linguine:\r\n        Bring a large pot of salted water to a boil.\r\n        Add the linguine and cook according to package instructions until al dente.\r\n        Reserve 1/2 cup of pasta water, then drain the linguine and set aside.\r\n\r\n    Sauté the Shrimp:\r\n        While the pasta is cooking, heat 2 tbsp of butter and 1 tbsp of olive oil in a large skillet over medium-high heat.\r\n        Season the shrimp with salt and pepper.\r\n        Add the shrimp to the skillet and cook for 1-2 minutes on each side, until pink and opaque. Remove from the skillet and set aside.\r\n\r\n    Make the Sauce:\r\n        In the same skillet, add the remaining 2 tbsp of butter and 1 tbsp of olive oil.\r\n        Add the minced garlic and red pepper flakes (if using), sautéing for about 1 minute until fragrant.\r\n        Pour in the white wine (or chicken broth), lemon juice, and lemon zest. Simmer for 2-3 minutes, allowing the sauce to reduce slightly.\r\n\r\n    Combine and Serve:\r\n        Return the cooked shrimp to the skillet, tossing to coat in the sauce.\r\n        Add the cooked linguine to the skillet, tossing everything together. If the sauce is too thick, add a bit of the reserved pasta water until the desired consistency is reached.\r\n        Stir in the chopped fresh parsley and adjust seasoning with salt and pepper to taste.\r\n        Serve immediately with lemon wedges on the side.\r\n\r\nEnjoy your bright and flavorful Lemon Garlic Shrimp Scampi!	666e254925d730.61663565.jpg	20min	easy	3	16-06-2024	12	50
-666e25bed83659.08403124	666b8d092770c2.98573332	Veggie Stir-Fry with Tofu	A colorful and nutritious stir-fry featuring tofu and a variety of vegetables in a savory soy-ginger sauce. Perfect for a quick and healthy weeknight dinner.	    400g firm tofu, cubed\r\n    2 tbsp vegetable oil, divided\r\n    1 red bell pepper, sliced\r\n    1 yellow bell pepper, sliced\r\n    1 large carrot, julienned\r\n    1 broccoli crown, cut into florets\r\n    1 cup snap peas\r\n    3 cloves garlic, minced\r\n    1 tbsp grated ginger\r\n    1/4 cup soy sauce\r\n    2 tbsp hoisin sauce\r\n    1 tbsp rice vinegar\r\n    1 tsp sesame oil\r\n    1 tbsp cornstarch mixed with 2 tbsp water\r\n    2 green onions, sliced\r\n    Sesame seeds (for garnish)\r\n    Cooked rice (for serving)\r\n	Prepare the Tofu:\r\n\r\n    Press the tofu to remove excess moisture, then cut it into 1-inch cubes.\r\n    Heat 1 tbsp of vegetable oil in a large skillet or wok over medium-high heat.\r\n    Add the tofu cubes and cook until golden and crispy on all sides, about 6-8 minutes. Remove from skillet and set aside.\r\n\r\nCook the Vegetables:\r\n\r\n    In the same skillet, add the remaining 1 tbsp of vegetable oil.\r\n    Add the garlic and ginger, sautéing for about 1 minute until fragrant.\r\n    Add the bell peppers, carrot, broccoli, and snap peas. Stir-fry for 5-7 minutes, until the vegetables are tender-crisp.\r\n\r\nMake the Sauce:\r\n\r\n    In a small bowl, whisk together the soy sauce, hoisin sauce, rice vinegar, and sesame oil.\r\n    Pour the sauce over the vegetables, stirring to coat.\r\n\r\nThicken the Sauce:\r\n\r\n    Add the cooked tofu back to the skillet.\r\n    Stir in the cornstarch mixture, cooking for another 1-2 minutes until the sauce has thickened and everything is well coated.\r\n\r\nServe:\r\n\r\n    Sprinkle the stir-fry with sliced green onions and sesame seeds.\r\n    Serve hot over cooked rice.	666e25bed49900.42934672.jpg	30min	easy	2	16-06-2024	15	50
-1	666e1bbb9e7401.42585095	Spaghetti Carbonara	A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper. It's creamy, flavorful, and perfect for a quick, satisfying meal.	200g spaghetti\r\n100g pancetta, diced\r\n2 large eggs\r\n50g Pecorino Romano cheese, grated\r\n50g Parmesan cheese, grated\r\n2 cloves garlic, minced\r\nFreshly ground black pepper\r\nSalt\r\nFresh parsley, chopped (optional)	Cook the Spaghetti:\r\n\r\n    Bring a large pot of salted water to a boil.\r\n    Add the spaghetti and cook according to package instructions until al dente.\r\n    Reserve 1 cup of pasta water, then drain the spaghetti.\r\n\r\nPrepare the Pancetta:\r\n\r\n    While the pasta is cooking, heat a large skillet over medium heat.\r\n    Add the diced pancetta and cook until crispy, about 5-7 minutes.\r\n    Add the minced garlic to the skillet and sauté for 1-2 minutes until fragrant. Remove from heat.\r\n\r\nMix the Eggs and Cheese:\r\n\r\n    In a medium bowl, whisk together the eggs, Pecorino Romano, and Parmesan until well combined.\r\n\r\nCombine the Ingredients:\r\n\r\n    Add the cooked spaghetti to the skillet with the pancetta and garlic. Toss to combine.\r\n    Remove the skillet from the heat.\r\n    Quickly pour the egg and cheese mixture over the hot pasta, stirring continuously to create a creamy sauce. If the sauce is too thick, add a bit of the reserved pasta water until the desired consistency is reached.\r\n\r\nSeason and Serve:\r\n\r\n    Season with freshly ground black pepper and salt to taste.\r\n    Garnish with chopped fresh parsley if desired.\r\n    Serve immediately and enjoy your delicious spaghetti carbonara!	666e207993fd09.20886036.jpg	30min	easy	4	16-06-2024	10	1
-2	666e1bbb9e7401.42585095	23	32	42	2312	2	30min	easy	2	16-06-2024	12	1
-57c047c9-d9c8-4951-b9d3-ed8ccca596fe	1234	weq	qwe	qwe	qwe	test	5min	easy	1	01.01.12	0	0
-a5d60354-4d5a-4cdf-acb6-b43ab682dcef	1234	asd	asd	asd	ad	test	5min	easy	1	01.01.12	0	0
 \.
 
 
@@ -341,9 +337,6 @@ COPY public.roles (id_role, role_desc) FROM stdin;
 --
 
 COPY public.users (id_user, id_role, email, password, username) FROM stdin;
-666b8d092770c2.98573332	0	test@test.pl	$2y$10$myvdR9yjlHrt8WdIWVf2eOZ6KOn2iatgVqjZVDDroMCUu4X.CzNsi	Tester
-666e1bbb9e7401.42585095	1	user1@email.com	$2y$10$Fl0Cvh/zWUgafk9aAfjFru1aWI18RefApwgTmRcna.x57XG3Sq1eq	User_1
-1234	0	a@a.pl	123	tempplate
 \.
 
 
@@ -351,8 +344,15 @@ COPY public.users (id_user, id_role, email, password, username) FROM stdin;
 -- Data for Name: users_details; Type: TABLE DATA; Schema: public; Owner: docker
 --
 
-COPY public.users_details (id_users_details, id_user, first_name, last_name, city, street_name, street_address, postal_code, state, country) FROM stdin;
+COPY public.users_details (id_users_details, first_name, last_name, city, street_name, street_address, postal_code, state, country) FROM stdin;
 \.
+
+
+--
+-- Name: bookmarks_seq; Type: SEQUENCE SET; Schema: public; Owner: docker
+--
+
+SELECT pg_catalog.setval('public.bookmarks_seq', 1, false);
 
 
 --
@@ -366,7 +366,7 @@ SELECT pg_catalog.setval('public.categories_id_category_seq', 20, true);
 -- Name: post_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: docker
 --
 
-SELECT pg_catalog.setval('public.post_categories_id_seq', 10, true);
+SELECT pg_catalog.setval('public.post_categories_id_seq', 39, true);
 
 
 --
@@ -497,11 +497,11 @@ ALTER TABLE ONLY public.rating
 
 
 --
--- Name: users_details users_details_id_user_fkey; Type: FK CONSTRAINT; Schema: public; Owner: docker
+-- Name: users_details users_details_id_users_details_fkey; Type: FK CONSTRAINT; Schema: public; Owner: docker
 --
 
 ALTER TABLE ONLY public.users_details
-    ADD CONSTRAINT users_details_id_user_fkey FOREIGN KEY (id_user) REFERENCES public.users(id_user) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT users_details_id_users_details_fkey FOREIGN KEY (id_users_details) REFERENCES public.users(id_user) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
