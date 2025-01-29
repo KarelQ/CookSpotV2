@@ -1,17 +1,29 @@
-//import React from "react";
+import React, { useEffect, useState } from "react";
 import "/src/css/style.css";
 import "/src/css/nav.css";
-//import "src/js/nav.js";
-
-const isAdmin = () => {
-    // Replace this with the actual logic for checking if the user is an admin
-    return true; // Example: always returns true for demonstration purposes
-};
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
+    const navigate = useNavigate();
+    const [isNavVisible, setNavVisible] = useState(true); // State to control nav visibility
+
+    useEffect(() => {
+        const isLoggedIn = sessionStorage.getItem("sessionUserId");
+        console.log(isLoggedIn);
+
+        if (isLoggedIn === null) {
+            navigate("/"); // Redirect if session is missing
+        }
+    }, [navigate]);
+
+    // Function to toggle navigation visibility
+    const toggleNav = () => {
+        setNavVisible((prevVisible) => !prevVisible);
+    };
+
     return (
         <>
-            <nav>
+            <nav style={{ display: isNavVisible ? "block" : "none" }}>
                 <img src="/src/assets/logo_with_name.png" alt="LOGO ALT" />
                 <ul>
                     <li>
@@ -29,17 +41,17 @@ const Nav = () => {
                     <li>
                         <a href="/addpost" className="button">Add Post</a>
                     </li>
-                    {isAdmin() && (
-                        <li>
-                            <a href="/dislikedposts" className="button">Disliked Posts</a>
-                        </li>
-                    )}
                     <li className="end">
                         <a href="/logout" className="button">Logout</a>
                     </li>
                 </ul>
             </nav>
-            <button id="toggleNavButton">MENU</button>
+            {/*<main className={isNavVisible ? "" : "mainToggle"}>*/}
+            {/*    /!* Content goes here *!/*/}
+            {/*</main>*/}
+            <button id="toggleNavButton" onClick={toggleNav}>
+                MENU
+            </button>
         </>
     );
 };
