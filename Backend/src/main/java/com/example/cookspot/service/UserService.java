@@ -1,9 +1,11 @@
 package com.example.cookspot.service;
+import com.example.cookspot.entity.UserDetails;
+import com.example.cookspot.repository.UserDetailsRepository;
 import com.example.cookspot.repository.UserRepository;
 import com.example.cookspot.entity.User;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,11 +17,13 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final UserDetailsRepository userDetailsRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, UserDetailsRepository userDetailsRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.userDetailsRepository = userDetailsRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     
@@ -51,8 +55,15 @@ public class UserService {
     }
 
 
+    public UserDetails getUserDetails(User user) {
+        //User user = userRepository.findById(session.getAttribute("userId").toString()).orElse(null);
+        System.out.println(user.getIdUser());
+        return userDetailsRepository.findByUser(user);
+    }
 
-
-
-
+    public UserDetails addUserDetails(UserDetails userDetails, User user) {
+        System.out.println(userDetails.getCity());
+        userDetails.setIdUsersDetails(user.getIdUser());
+        return userDetailsRepository.save(userDetails);
+    }
 }

@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -26,8 +28,13 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+
 public class SecurityConfig {
+    private final MyUserDetailsService myUserDetailsService;
+
+    public SecurityConfig(MyUserDetailsService myUserDetailsService) {
+        this.myUserDetailsService = myUserDetailsService;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -73,6 +80,8 @@ public class SecurityConfig {
             }
         };
     }
+
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -130,7 +139,15 @@ public class SecurityConfig {
 //        return source;
 //    }
 
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
 
+        authenticationManagerBuilder
+                .userDetailsService(myUserDetailsService);
+        return authenticationManagerBuilder.build();
+    }
 
 
 

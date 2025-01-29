@@ -70,7 +70,8 @@ public class PostService {
 
     public PostDTO savePost(PostDTO postDTO) {
 
-        User user = userRepository.findById("1234").orElse(null);
+        //User user = userRepository.findById("1234").orElse(null);
+        User user = userRepository.findById(postDTO.getIdUser()).orElse(null);
 
         List<Category> category =  categoryRepository.findAllById(postDTO.getCategoryNames());
 
