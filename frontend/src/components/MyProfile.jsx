@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
 import {postListByUserId} from "../services/PostService.jsx";
 import PostList from "../components/PostList";
+import Profile from "./UserDetails.jsx";
 
 
 const MyProfile = () => {
     const [posts, setPosts] = useState([]);
-    const [id] = useState("666b8d092770c2.98573332");
+    //const [id] = useState("666b8d092770c2.98573332");
+    const id = sessionStorage.getItem("sessionUserId");
 
     useEffect(() => {
         postListByUserId(id).then((response) => {
@@ -16,7 +18,10 @@ const MyProfile = () => {
     }, []);
 
     return (
-        <PostList posts={posts} />
+        <>
+            <Profile/>
+            <PostList posts={posts} />
+        </>
     )
 }
 
