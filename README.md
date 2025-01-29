@@ -61,14 +61,14 @@ The project includes a comprehensive design and structure for the database, ensu
 
 1. **MVC (Model-View-Controller)**
    - Separates the application into Model, View, and Controller components.
-   - **Example**: [models/Post.php](.src/models/Post.php), [views/shared/display-post.php](./public/views/shared/display-post.php), [controllers/PostController.php](src/controllers/PostController.php)
+   - **Example**: [dto/PostDTO.java](./Backend/src/main/java/com/example/cookspot/dto/PostDTO.java), [entity/Post.java](./Backend/src/main/java/com/example/cookspot/entity/Post.java), [/controller/PostController.java](./Backend/src/main/java/com/example/cookspot/controller/PostController.java)
 2. **Repository**
    - Abstracts the data layer, providing a modular structure.
-   - **Example**: [PostRepository.php](./src/repository/PostRepository.php)
+   - **Example**: [PostRepository.java](./Backend/src/main/java/com/example/cookspot/repository/PostRepository.java)
 
 3. **Template Method**
    - Defines the skeleton of an algorithm in a method, deferring some steps to subclasses.
-   - **Example**: [form-controller.js](./public/js/search.js.#L32)
+   - **Example**: [/PostList.jsx](./frontend/src/components/PostList.jsx)
    
 
 ## Installation
