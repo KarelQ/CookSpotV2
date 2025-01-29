@@ -54,7 +54,7 @@ The project includes a comprehensive design and structure for the database, ensu
 
 2. **Database Schema:**
    - The `Database_dump.sql` file contains the SQL commands to create the database structure with testing data.
-   - [View Database_dump Script](./Database_dump.sql)
+   - [View Database_dump Script](./sql_dump.sql)
      
 
 ## Design patterns
