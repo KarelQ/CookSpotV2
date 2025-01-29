@@ -4,17 +4,40 @@ import style from '/src/css/post-detales.module.css'
 
 import Loading from './Loading';
 import BookmarkContainer from "./BookmarkContainer.jsx";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {deletePostById} from "../services/PostService.jsx";
 
 
-const PostDetails = ({ post, rate, book, isAdmin }) => {
+const PostDetails = ({ post, rate, book }) => {
+    const navigate = useNavigate();
+    const [isOwner, setIsOwner] = useState(false);
 
+    useEffect(() => {
+        if (post.idUser === sessionStorage.getItem("sessionUserId")) {
+            setIsOwner(true);
+        }
+    }, [post.idUser]);
+
+
+    const deleteThatPost = () => {
+        deletePostById(post.idPost).then((response) => {
+            console.log(response);
+            navigate("/myprofile"); // Przekierowanie do profilu po usunięciu posta
+        }).catch((error) => {
+            console.error("Error deleting post:", error);
+        });
+    };
     if (!post || !post.categoryNames) {
         return <Loading/>; // Show a loading state
     }
 
+    console.log(isOwner);
     const handleError = (e) => {
         e.target.src = 'http://localhost:8080/api/img/default.png'; // Ścieżka do domyślnego obrazu
     };
+
+
 
 
     return (
@@ -96,9 +119,11 @@ const PostDetails = ({ post, rate, book, isAdmin }) => {
                     <p>{post.recipe}</p>
                 </div>
 
-                {isAdmin && (
+
+                {
+                    isOwner && (
                     <div id="admin" className={style["admin"]}>
-                        <a href={`/deletepost?id=${post.idPost}`} className="button">
+                        <a onClick={deleteThatPost} className="button">
                             Delete That Post
                         </a>
                     </div>

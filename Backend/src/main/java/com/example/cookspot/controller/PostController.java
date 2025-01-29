@@ -78,9 +78,9 @@ public class PostController {
             summary = "Delete a post",
             description = "Deletes a post from the database based on the provided post ID. Returns a 204 status code (No Content) if the deletion is successful."
     )
-    @DeleteMapping("/api/post/delete/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable String id) {
+    @DeleteMapping("/api/posts/delete/{id}")
+    public String deletePost(@PathVariable String id) {
         postService.deletePost(id);
-        return ResponseEntity.noContent().build();
+        return "deleted";
     }
 }
