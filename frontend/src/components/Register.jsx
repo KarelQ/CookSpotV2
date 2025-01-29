@@ -5,7 +5,7 @@ import {v4 as uuidv4} from "uuid";
 import {useNavigate} from "react-router-dom";
 
 const Register = () => {
-    const [messages, setMessages] = useState(["Example error message"]); // Przykładowe dane
+    const [messages, setMessages] = useState([""]); // Przykładowe dane
 
     const [email, setEmail] = useState([""]);
     const [username, setUsername] = useState("");
@@ -55,16 +55,16 @@ const Register = () => {
                         type="text"
                         placeholder="Username"
                         className={style['input-text']}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                     <input
                         name="email"
                         type="email"
                         placeholder="Email"
                         className={style['input-text']}
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                         name="password"

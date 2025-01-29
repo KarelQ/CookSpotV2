@@ -39,15 +39,15 @@ const Profile = () => {
                     <h3>Your Account</h3>
                     <p>Username: {user.username}</p>
                     <p>Email: {user.email}</p>
-                    <a href="changeusername" className={`"button" ${style.details}`}>
-                        Change Username
-                    </a>
-                    <a href="changeemail" className={`"button" ${style.details}`}>
-                        Change Email
-                    </a>
-                    <a href="changepassword" className={`"button" ${style.details}`}>
-                        Change Password
-                    </a>
+                    {/*<a href="changeusername" className={`"button" ${style.details}`}>*/}
+                    {/*    Change Username*/}
+                    {/*</a>*/}
+                    {/*<a href="changeemail" className={`"button" ${style.details}`}>*/}
+                    {/*    Change Email*/}
+                    {/*</a>*/}
+                    {/*<a href="changepassword" className={`"button" ${style.details}`}>*/}
+                    {/*    Change Password*/}
+                    {/*</a>*/}
                 </div>
 
                 {/* User Additional Details */}

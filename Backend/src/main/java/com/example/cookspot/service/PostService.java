@@ -6,6 +6,7 @@ import com.example.cookspot.repository.PostRepository;
 import com.example.cookspot.entity.Post;
 import com.example.cookspot.dto.PostDTO;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -73,6 +74,12 @@ public class PostService {
         //User user = userRepository.findById("1234").orElse(null);
         User user = userRepository.findById(postDTO.getIdUser()).orElse(null);
 
+        LocalDate today = LocalDate.now();
+
+        // Formatowanie do "dd.MM.yyyy"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String formattedDate = today.format(formatter);
+
         List<Category> category =  categoryRepository.findAllById(postDTO.getCategoryNames());
 
         Post post = new Post();
@@ -93,7 +100,7 @@ public class PostService {
         post.setUser(user);
 
         post.setImage(postDTO.getImage());
-        post.setCreatedAt("01.01.12");
+        post.setCreatedAt(formattedDate);
 
         System.out.println(post.toString());
 
