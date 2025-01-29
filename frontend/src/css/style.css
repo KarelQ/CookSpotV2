@@ -35,6 +35,23 @@ body {
 
    }
 
+.base-container:has(#login){
+    background: url(/src/assets/pizza.png);
+    background-attachment: fixed;
+    background-position: top center;
+    background-size: 100vw;
+
+    z-index: -1;
+    backdrop-filter: blur(5px) brightness(0.4);
+    display: block;
+}
+
+.base-container:has(#profile){
+    display: block;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
 
 .base-container{
     display: flex;
