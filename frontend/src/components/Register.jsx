@@ -1,7 +1,8 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from "/src/css/login.module.css";
 import { register} from "../services/UserService.jsx";
 import {v4 as uuidv4} from "uuid";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [messages, setMessages] = useState(["Example error message"]); // Przykładowe dane
@@ -10,6 +11,8 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confPassword, setConfPassword] = useState("");
+
+    const navigate = useNavigate();
 
     const [idUser, setUniqueId] = useState("");
     useEffect(() => {
@@ -32,12 +35,13 @@ const Register = () => {
 
         register(user).then((response) => {
             console.log(response.data);
+            navigate(`/login`);
         });
     }
     return (
         <div id={"login"} className={style['base-container-login']}>
             <div className={style['login-container']}>
-                <img src="/img/logo3.png" alt="logo alt" />
+                <img src="/src/assets/logo_with_name.png" alt="logo alt"/>
 
                 <form>
                     <span className={style['messages']}>
@@ -90,4 +94,4 @@ const Register = () => {
     );
 };
 
-        export default Register;
+export default Register;
