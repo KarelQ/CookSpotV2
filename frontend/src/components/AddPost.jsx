@@ -24,7 +24,7 @@ const AddPost = ({ messages }) => {
 
     const navigate = useNavigate();
 
-    const [idUserOwner] = useState("1234");
+
     const [like] = useState(0);
     const [dislike] = useState(0);
 
@@ -90,6 +90,8 @@ const AddPost = ({ messages }) => {
     async function savePost(e) {
         e.preventDefault();
 
+        const idUser = sessionStorage.getItem("sessionUserId");
+        console.log("idUser", idUser);
 
         // private String idPost;
         // private String title;
@@ -154,7 +156,7 @@ const AddPost = ({ messages }) => {
             categoryNames,
             like,
             dislike,
-            idUserOwner,
+            idUser,
         }
         console.log(post);
 

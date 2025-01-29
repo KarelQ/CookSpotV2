@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {category} from "../services/CategoryService.jsx";
 
 
+
 const ExploreCategory = () => {
     const [categories, setCategories] = useState([]);
 
