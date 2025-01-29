@@ -1,5 +1,6 @@
 package com.example.cookspot.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +20,11 @@ public class ImageController {
 
     private final String uploadDir = "C:/uploads"; // Ścieżka, w której przechowywane są zdjęcia
 
+
+    @Operation(
+            summary = "Get image by name",
+            description = "Fetches an image from the server based on the provided image name. Returns the image file as a resource. If the image is not found, it returns a 404 (Not Found) response."
+    )
     @GetMapping("/img/{imageName}")
     public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
         try {

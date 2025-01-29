@@ -1,5 +1,6 @@
 package com.example.cookspot.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +15,11 @@ import java.nio.file.Paths;
 @RequestMapping("/api")
 public class FileUploadController {
 
+
+    @Operation(
+            summary = "Upload a new file",
+            description = "Uploads a new file to the server with the provided new file name. The file is stored on the server and can be accessed later using the given name."
+    )
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(
             @RequestParam("file") MultipartFile file,
