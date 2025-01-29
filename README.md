@@ -55,7 +55,7 @@ The project includes a comprehensive design and structure for the database, ensu
 2. **Database Schema:**
    - The `Database_dump.sql` file contains the SQL commands to create the database structure with testing data.
    - [View Database_dump Script](./Database_dump.sql)
-   - 
+     
 
 ## Design patterns
 
@@ -66,7 +66,7 @@ The project includes a comprehensive design and structure for the database, ensu
    - Abstracts the data layer, providing a modular structure.
    - **Example**: [PostRepository.php](./src/repository/PostRepository.php)
 
-6. **Template Method**
+3. **Template Method**
    - Defines the skeleton of an algorithm in a method, deferring some steps to subclasses.
    - **Example**: [form-controller.js](./public/js/search.js.#L32)
    
@@ -77,20 +77,48 @@ Project is dockerized for easy setup and deployment. Follow these steps to get t
 
 1. **Clone the Repository**
 2. **Ensure Required Dependencies Are Installed**
-
 Make sure you have the following installed on your system:
     -Docker
     -Docker Compose
     -Node.js & npm (for running the React frontend)
     -Java 17+ (for running the Spring Boot backend)
-4. **Build Docker Images:**
-`docker-compose build`
-5. **Start Docker Containers:**
-`docker-compose up`
-6. **Access the Application:**
-After the containers are up and running, you can access the application through your web browser.
+3. **Set Up and Run the Application**
+   
+   >Start Database and Nginx using Docker
 
+In the project directory, run:
 
+      docker-compose up -d
+
+This will start:
+   -PostgreSQL database
+   -Nginx reverse proxy
+> Start the Spring Boot Backend
+   Navigate to the backend directory and start the server:
+
+      cd backend
+      ./mvnw spring-boot:run  # On macOS/Linux
+      mvnw.cmd spring-boot:run  # On Windows
+
+The backend will run at: http://localhost:8080
+
+   
+> Start the React Frontend
+Navigate to the frontend directory and start the React app:
+
+      cd frontend
+      npm install  # Install dependencies
+      npm start
+
+The frontend will run at: http://localhost:3000
+   
+4. **Access the Application**
+   Once all services are running:
+
+    - Open http://localhost:3000 to use the application.
+    - Open http://localhost:8080/swagger-ui.html to access the Swagger API documentation.
+
+This setup ensures that the database and reverse proxy are containerized with Docker, while the backend (Spring Boot) and frontend (React) run as separate services.
 
 ## Usage Preview
 ### Login Page
